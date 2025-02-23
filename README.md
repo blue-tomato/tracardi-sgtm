@@ -7,8 +7,7 @@ This repository contains a custom **Server Google Tag Manager (sGTM)** template 
 - Easy integration of Tracardi into Server Google Tag Manager
 - Support for custom events
 - Flexible configuration options
-- GDPR-compliant tracking options
-
+  
 ## Installation
 
 1. Open your **Google Tag Manager (Server Container)**.
