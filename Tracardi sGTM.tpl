@@ -1,4 +1,4 @@
-﻿___TERMS_OF_SERVICE___
+___TERMS_OF_SERVICE___
 
 By creating or modifying this file you agree to Google Tag Manager's Community
 Template Gallery Developer Terms of Service available at
@@ -156,8 +156,8 @@ const tracardiData = {
     ids: anonIds
   },
   options: {
-    saveEvent: data.tracardiDebugMode || false,
-    saveSession: data.tracardiDebugMode || false,
+    saveEvent: !data.tracardiDebugMode || true,
+    saveSession: !data.tracardiDebugMode || true,
     debugger: data.tracardiDebugMode || false
   }
 };
@@ -476,5 +476,3 @@ scenarios: []
 ___NOTES___
 
 Created on 23.2.2025, 10:15:03
-
-
