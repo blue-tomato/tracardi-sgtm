@@ -90,7 +90,7 @@ const utmData = {
   content: null,
 };
 
-if (eventData.page_location && eventData.page_location.length > 0) {
+if (eventData && eventData.page_location && eventData.page_location.length > 0) {
   const urlObj = parseUrl(eventData.page_location);
   if (urlObj && urlObj.searchParams) {
     const paramKeys = ['source', 'medium', 'campaign', 'term', 'content'];
@@ -102,13 +102,12 @@ if (eventData.page_location && eventData.page_location.length > 0) {
 
 // handle additional user IDs
 const anonIds = [];
-if(eventData.user_id) {
-   if(eventData.user_id && eventData.user_id.length > 0) {
-     const userId = data.userIdPrefix + eventData.user_id;
-     anonIds.push(userId);
-   }
+if(eventData && eventData.user_id && eventData.user_id.length > 0) {
+  const userId = data.userIdPrefix + eventData.user_id;
+  anonIds.push(userId);
 }
 
+// TODO: throws error (reading length of undefined?)
 if(eventData.user_data) {
    if(eventData.user_data.sha256_email_address && eventData.user_data.sha256_email_address.length > 0) {
      const sha256EmailAddress = 'sha256_email_address_' + eventData.user_data.sha256_email_address;
@@ -118,8 +117,8 @@ if(eventData.user_data) {
 
 // Handle Device/User Agent Data
 const tracardiDeviceData = {
-  name: eventData.client_hints.brands[eventData.client_hints.brands.length-1].brand || null,
-  version: eventData.client_hints.brands[eventData.client_hints.brands.length-1].version || null,
+  name: eventData.client_hints.full_version_list[eventData.client_hints.full_version_list.length-1].brand || null,
+  version: eventData.client_hints.full_version_list[eventData.client_hints.full_version_list.length-1].version || null,
   touch: eventData.client_hints.mobile || false,
   geo: {
     country: {
