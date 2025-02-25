@@ -102,10 +102,17 @@ if (eventData.page_location && eventData.page_location.length > 0) {
 
 // handle additional user IDs
 const anonIds = [];
-if(eventData.user_data) {
-   if(eventData.user_data.user_id && eventData.user_data.user_id.length > 0) {
-     const userId = data.userIdPrefix + eventData.user_data.user_id;
+if(eventData.user_id) {
+   if(eventData.user_id && eventData.user_id.length > 0) {
+     const userId = data.userIdPrefix + eventData.user_id;
      anonIds.push(userId);
+   }
+}
+
+if(eventData.user_data) {
+   if(eventData.user_data.sha256_email_address && eventData.user_data.sha256_email_address.length > 0) {
+     const sha256EmailAddress = 'sha256_email_address_' + eventData.user_data.sha256_email_address;
+     anonIds.push(sha256EmailAddress);
    }
 }
 
