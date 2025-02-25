@@ -92,7 +92,9 @@ const utmData = {
 
 if (eventData && eventData.page_location && eventData.page_location.length > 0) {
   const urlObj = parseUrl(eventData.page_location);
-  if (urlObj && urlObj.searchParams) {
+  // only set UTM parameters if session is empty
+  // UTM parameters can only be tracked in tracardi for new (= empty) sessions
+  if (urlObj && urlObj.searchParams && tracardiSessionId === '') {
     const paramKeys = ['source', 'medium', 'campaign', 'term', 'content'];
     paramKeys.forEach(key => {
       utmData[key] = urlObj.searchParams[key] || null;
@@ -155,11 +157,15 @@ const tracardiData = {
       app: tracardiAppData
     }
   ],
-  session: { id: tracardiSessionId },
-  profile: { id: tracardiProfileId },
-  source: {
-    id: data.tracardiSourceId,
+  session: {
+    id: tracardiSessionId
+  },
+  profile: {
+    id: tracardiProfileId,
     ids: anonIds
+  },
+  source: {
+    id: data.tracardiSourceId
   },
   options: {
     saveEvent: !data.tracardiDebugMode || true,
