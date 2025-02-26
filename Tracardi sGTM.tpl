@@ -109,7 +109,6 @@ if(eventData && eventData.user_id && eventData.user_id.length > 0) {
   anonIds.push(userId);
 }
 
-// TODO: throws error (reading length of undefined?)
 if(eventData.user_data) {
    if(eventData.user_data.sha256_email_address && eventData.user_data.sha256_email_address.length > 0) {
      const sha256EmailAddress = 'sha256_email_address_' + eventData.user_data.sha256_email_address;
